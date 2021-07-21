@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
 
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
 {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
 {%- if first_3d_model -%}
   {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
@@ -309,7 +311,7 @@
   {%- render 'cart-notification' -%}
 
   <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal">
-    <div role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
+    <div class="product-media-modal__dialog" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
       <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
 
       <div class="product-media-modal__content" role="document" aria-label="{{ 'products.modal.label' | t }}" tabindex="0">
@@ -444,7 +446,6 @@
 
   customElements.define('product-modal', ProductModal);
 {% endjavascript %}
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 {%- if first_3d_model -%}
   <script type="application/json" id="ProductJSON-{{ product.id }}">
